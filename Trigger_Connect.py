@@ -9,10 +9,10 @@ def checkPupilPlayer():
     result = sock.connect_ex(('127.0.0.1',50020))
     
     if result == 0:
-        print 'Found Pupil player'
+        print 'Found Pupil Capture'
    
     else:
-        print 'Cannot find Pupil capture'
+        print 'Cannot find Pupil Capture'
         sys.exit()
     
     sock.close()
@@ -30,11 +30,11 @@ def connectPupil():
     t2 = time()
     
     if not tStamp:
-        print 'Cannot connect to Pupil capture'
+        print 'Cannot connect to Pupil Capture'
         sys.exit()
     
-    print 'Connected to Pupil player'
-    print 'Current timestamp from Pupil player:', tStamp
+    print 'Connected to Pupil Capture'
+    print 'Current timestamp from Pupil Capture:', tStamp
     print 'Round trip command delay:', t2-t1
     
     sleep(1)
