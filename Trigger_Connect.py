@@ -4,7 +4,7 @@ from time import time,sleep
 import socket
 import sys
 
-def checkPupilPlayer():
+def checkPupilCapture():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     result = sock.connect_ex(('127.0.0.1',50020))
     
@@ -78,7 +78,7 @@ class recorder:
     
 def main():
     
-    checkPupilPlayer()
+    checkPupilCapture()
 
     pupil = connectPupil()
        
