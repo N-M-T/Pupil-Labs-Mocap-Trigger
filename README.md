@@ -10,7 +10,7 @@ An Arduino Micro microcontroller, a Vicon server with sync out capabilities, a W
 
 Upload the Arduino sketch to your board. Connect an AV lead to a sync out on the Vicon server, and secure the other end to pin A0 on the Arduino. Connect the Arduino to your PC using a USB. In Nexus, set the corresponding sync out port to 'duration'. The server will then give a TTL voltage of 5V when an acquisition is started. Open pupil labs capture and ensure the glasses are connected and everything is running. Finally, run Trigger_Connect.py.
 
-Depending on which USB port the Arduino is connected to, you might have to edit line 45 in Trigger_Connect.py, for example, from serial.Serial('COM10', 115200) to serial.Serial('COM11', 115200). 
+Depending on which USB port the Arduino is connected to, you might have to edit line 45 in Trigger_Connect.py, for example, from serial.Serial('COM10', 115200) to serial.Serial('COM11', 115200). Also lines 9 and 23 for ip address. 
 
 It is best to run Trigger_Connect.py from the command prompt as I have found IDEs like Spyder can result in unwanted behaviour.
 
