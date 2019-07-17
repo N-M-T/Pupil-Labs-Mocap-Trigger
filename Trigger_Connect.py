@@ -3,7 +3,10 @@ import zmq
 from time import time,sleep
 import socket
 import sys
+import os
+import datetime
 
+#check pupil capture instance exists
 def checkPupilCapture():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     result = sock.connect_ex(('127.0.0.1',50020))
@@ -18,15 +21,16 @@ def checkPupilCapture():
     sock.close()
 
 
+#connect to pupil capture using zmq protocol
 def connectPupil():
     context =  zmq.Context()
-    socket = context.socket(zmq.REQ)
-    socket.connect('tcp://127.0.0.1:50020')#tcp://192.168.1.100:50020')
-
+    remote = context.socket(zmq.REQ)
+    remote.connect('tcp://127.0.0.1:50020')
+    
     #get timing information
     t1 = time()
-    socket.send('t') #'t' get pupil capture timestamp returns a float as string
-    tStamp = socket.recv()
+    remote.send('t')
+    tStamp = remote.recv()
     t2 = time()
     
     if not tStamp:
@@ -34,61 +38,109 @@ def connectPupil():
         sys.exit()
     
     print 'Connected to Pupil Capture'
-    print 'Current timestamp from Pupil Capture:', tStamp
     print 'Round trip command delay:', t2-t1
-    
-    sleep(1)
-    
-    return socket    
+
+    return remote 
 
 
-def connectVicon():
+#connect to motion capture server via arduino 
+def connectMocap():
     try:
         ard = serial.Serial('COM10', 115200)#, timeout=.1)
-        print 'Found serial port, ready to start Vicon acquisition'       
+        print 'Found serial port'       
         
         return ard
     
     except Exception:
-        print 'Cannot find Vicon server -- check trigger box is connected to laptop (usb) and Vicon server (av)'
+        print 'Cannot find Mocap server -- check trigger box is connected to laptop (usb) and Mocap server (av)'
         sys.exit()
 
+
+#set Pupil Capture's time base to this scripts time (before starting a recording)
+def timeSet(remote):
+    remote.send_string("T {}".format(time()))
+    print(remote.recv_string())
     
-class recorder:
-    def __init__(self,socket):
-        self.recording = False
-        self.connected = False
-        self.socket = socket
+    print "Fire (Begin pupil recording and start/stop Mocap acquisition/s) at will, said Jean-Luc Picard"
+
+
+#save timeStamp to current recording folder
+def appendTimestamp(start_stop,value):
+    #find todays recording folder
+    path = 'C:/Users/Neil Thomas/Desktop/recordings/'
+    now = datetime.datetime.now()
+    
+    year = str(now.year)
+    month = str(now.month)
+    day = now.day
+    
+    if day >= 10:
+        day = str(day)
+    else:
+        day = '0'+str(day)
+    
+    date = year+'_'+'0'+month+'_'+day
+    target = [name for name in os.listdir(path) if name == date]
+    
+    recordings = os.listdir(path+target[0])
+    current = max(recordings)
+    
+    #current path 
+    currentPath = path+target[0]+'/'+current+'/'
         
-    def record(self):
-        self.socket.send('R')
-        print 'Recording started:', self.socket.recv()
-        self.recording = True
-    
-    def stop(self):
-        self.socket.send('r')
-        print 'Recording stopped:', self.socket.recv()
+    try:
+        file = open(currentPath+'Mocap_timestamps.txt', 'a+')
+        file.write(start_stop+value+'\n')
+        file.close()
+    except:
+        file = open(currentPath+'Mocap_timestamps.txt', 'w+')
+        file.write(start_stop+value+'\n')
+        file.close()
+
+#save timestamp when a mocap acquisition is started/stopped
+class trigger:
+    def __init__(self, pupil):
         self.recording = False
+        self.pupil = pupil
+        
+    def startTrigger(self):        
+        self.pupil.send('t')
+        Time = self.pupil.recv()
+        self.recording = True
+
+        print 'Mocap recording started:', Time
+        
+        #save timestamp to current recording folder
+        appendTimestamp('start,', Time)
+    
+    def stopTrigger(self):
+        self.pupil.send('t')
+        Time = self.pupil.recv()
+        self.recording = False
+        print 'Mocap recording stopped:', Time
+        
+        appendTimestamp('end,', Time)
             
     def connectionFailed(self):
-        self.connected = False
-        print 'Stopped receiving data from Vicon server'
+        print 'Stopped receiving data from Mocap server'
         sys.exit()
+        
    
-    
 def main():
     
     checkPupilCapture()
 
     pupil = connectPupil()
        
-    vicon = connectVicon()
+    Mocap = connectMocap()
+    
+    timeSet(pupil)
     
     try:
-        rec = recorder(pupil)
+        rec = trigger(pupil)
         
         while True:
-            data = vicon.read()
+            data = Mocap.read()
             
             if not data:
                 rec.connectionFailed()
@@ -96,16 +148,18 @@ def main():
             else:
                 if data == 'h':
                     if not rec.recording:
-                        rec.record()
+                        rec.startTrigger()
                         
                 elif data == 'l':
                     if rec.recording:
-                        rec.stop()
-                                
+                        rec.stopTrigger()          
+             
+            
     except KeyboardInterrupt:
-        vicon.close()
-        print 'Vicon connection disabled'
+        Mocap.close()
+        print 'Mocap connection disabled'
         sys.exit()
            
+        
 if __name__ == '__main__':
     main()     
