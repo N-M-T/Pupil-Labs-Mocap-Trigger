@@ -23,3 +23,12 @@ It is best to run Trigger_Connect.py from the command prompt as I have found IDE
 ## License
 
 Pupil-Labs-Vicon-Trigger is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+
+## Citation
+
+Citation option if you find this useful!
+
+
+[![DOI](https://zenodo.org/badge/190172285.svg)](https://zenodo.org/badge/latestdoi/190172285)
+
+
