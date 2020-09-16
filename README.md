@@ -1,4 +1,4 @@
-# Pupil labs - Vicon trigger
+# Pupil labs - Mocap trigger
 
 Take Pupil player timestamp in accordance with start/stop of Vicon Nexus acquisition (also tested with Qualisys).
 
