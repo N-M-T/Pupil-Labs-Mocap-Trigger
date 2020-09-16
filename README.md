@@ -28,7 +28,7 @@ Pupil-Labs-Vicon-Trigger is free software: you can redistribute it and/or modify
 
 Citation option if you find this useful!
 
-Thomas, NM. (2020) Github repository, https://github.com/n-m-t/Pupil-Labs-Mocap-Trigger, DOI:10.5281/zenodo.4032375 
+Thomas, NM. (2020) Github repository, https://github.com/n-m-t/Pupil-Labs-Mocap-Trigger, https://doi.org/10.5281/zenodo.4032375 
 
 
 [![DOI](https://zenodo.org/badge/190172285.svg)](https://zenodo.org/badge/latestdoi/190172285)
