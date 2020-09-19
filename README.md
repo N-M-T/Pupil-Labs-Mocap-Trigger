@@ -89,6 +89,7 @@ For clock_sync and pupil_remote_timestamps, modify the path variable to point to
 Watch out for errors
 4. Calibrate your participant and start a Pupil Capture recording
 5. Start/stop a Vicon recording as appropriate.
+6. **Important:** Use Ctrl+c to escape a script and close sockets (disconnecting the usb should also be fine)
 
 For clock_sync and pupil_remote_timestamps, time stamps will be stored in the recording folder in a 
 txt file (Mocap_timestamps.txt). If multiple mocap acquisitions are made during the same Pupil Capture 
