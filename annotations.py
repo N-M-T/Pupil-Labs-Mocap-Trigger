@@ -65,7 +65,7 @@ def connect_mocap():
     
     return ard    
 
-
+	
 def get_pupil_time(socket):
     t1 = time()
     socket.send_string('t')
@@ -73,7 +73,7 @@ def get_pupil_time(socket):
     t2 = time()
     oneway_dur = (t2 - t1) / 2
     
-    return  pct - oneway_dur
+    return  (float(pct.decode()) - oneway_dur) - 0.0005
 
 
 def new_trigger(label, duration, time_stamp):

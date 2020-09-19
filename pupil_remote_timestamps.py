@@ -71,7 +71,7 @@ def get_pupil_time(socket):
     pct = socket.recv()
     t2 = time()
     oneway_dur = (t2-t1) / 2
-    return (float(pct.decode()) - oneway_dur) - 0.001
+    return (float(pct.decode()) - oneway_dur) - 0.0005
 
 
 def append_timestamp(start_stop, value):  

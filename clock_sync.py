@@ -154,10 +154,10 @@ def main():
             t = time()
             
             if data.decode() == 'h':
-                trigger.start_trigger(t - 0.001)
+                trigger.start_trigger(t - 0.0005)
                 
             if data.decode() == 'l':
-                trigger.stop_trigger(t - 0.001)
+                trigger.stop_trigger(t - 0.0005)
     
     except (KeyboardInterrupt, SystemExit):
         print('User exited program')        
