@@ -3,7 +3,7 @@ import zmq
 import socket
 import sys
 import msgpack as serializer
-import time as time
+from time import time
 
 
 ip = '127.0.0.1'

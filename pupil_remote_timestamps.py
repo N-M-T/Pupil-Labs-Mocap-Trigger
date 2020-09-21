@@ -97,7 +97,7 @@ def append_timestamp(start_stop, value):
         file.close()
     except:
         file = open(currentPath + 'Mocap_timestamps.txt', 'w+')
-        file.write(start_stop + value + '\n')
+        file.write(start_stop + ': ' + value + '\n')
         file.close()
 
 
