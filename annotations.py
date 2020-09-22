@@ -127,6 +127,7 @@ class Trigger:
             print('Stopped mocap acquisition')
             self.recording = False
     
+    
     def send_trigger(self, trigger):
         payload = serializer.dumps(trigger, use_bin_type=True)
         self.pub_socket.send_string(trigger["topic"], flags=zmq.SNDMORE)

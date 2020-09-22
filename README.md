@@ -65,7 +65,7 @@ Pupil Remote.
 ### Arduino
 
 Make a new sketch in [Arduino Create](https://create.arduino.cc/) using Trigger.io. Connect Arduino 
-to PC via a USB. Verify and upload the sketch. Check the Sketch is running okay by opening the Monitor 
+to PC via a USB. Verify and upload the sketch. Check the sketch is running okay by opening the Monitor 
 in Arduino Create. You should see 'l' repeating. 
 
 Connect an AV lead to the sync-out port on the mocap server, and secure the other end to pin A0 on the 
@@ -88,7 +88,7 @@ For timestamps and timestamps_wclock_sync, modify the path variable to point to 
 3. Run desired script and wait for 'Ready to start/stop mocap acquisition...'.
 Watch out for errors
 4. Calibrate your participant and start a Pupil Capture recording
-5. Start/stop a Vicon recording as appropriate.
+5. Start/stop a mocap recording as appropriate.
 6. **Important:** Use Ctrl+c to escape a script and close sockets (disconnecting the usb should also be fine)
 
 For timestamps and timestamps_wclock_sync, time stamps will be stored in the recording folder in a 
