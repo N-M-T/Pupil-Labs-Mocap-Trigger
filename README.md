@@ -1,4 +1,4 @@
-# Pupil labs - Mocap trigger
+# Pupil Labs - Mocap Trigger
 
 Use a low-cost Arduino microcontroller to synchronise motion Capture systems (e.g. Vicon/Qualisys)
 with the Pupil Core Mobile eye tracker. Temporal accuracy currently ~1 ms
@@ -25,13 +25,13 @@ the Arduino, which will improve temporal accuracy.
  
 ### Clock sync method
 
-annotations_wclock_sync and clock_sync attempt to synchronise the Pupil Capture time base with that of
+annotations_wclock_sync and timestamps_wclock_sync attempt to synchronise the Pupil Capture time base with that of
 the PC using:
 
 	socket.send_string("T {}".format(time())) 
 
 Due to variations in the speed of the connection, sync_clocks and test_sync functions are used to 
-recursively set and test the sync  until a required threshold of <0.01ms is achieved. All time stamps on 
+recursively set and test the sync  until a required threshold (e.g. <0.01ms) is achieved. All time stamps on 
 trigger input are then taken from the PC clock.
 
 - **Pros**: This method is stable when the eye tracker is connected to the PC via USB. 
@@ -79,7 +79,7 @@ will then provide ~0.2V when not recording, and ~5.0V when an acquisition is sta
 In all scripts, change the IP and Port to connect to Pupil Capture. Pupil Capture's
 local IP address and Port can be found in Pupil Capture software under the Network API plugin. 
 
-For clock_sync and pupil_remote_timestamps, modify the path variable to point to your recording directory. 
+For timestamps and timestamps_wclock_sync, modify the path variable to point to your recording directory. 
 
 ### Ready to go?
 
@@ -91,9 +91,12 @@ Watch out for errors
 5. Start/stop a Vicon recording as appropriate.
 6. **Important:** Use Ctrl+c to escape a script and close sockets (disconnecting the usb should also be fine)
 
-For clock_sync and pupil_remote_timestamps, time stamps will be stored in the recording folder in a 
+For timestamps and timestamps_wclock_sync, time stamps will be stored in the recording folder in a 
 txt file (Mocap_timestamps.txt). If multiple mocap acquisitions are made during the same Pupil Capture 
-recording, the associated timestamps will be appended to the txt file. 
+recording, the associated timestamps will be appended to the txt file.
+
+For annotations and annotations_wclock_sync, time stamps will be stored in the recording annotation file.
+These can be viewed in Pupil Player and exported as csv file.
 
 It may be best to run the scripts from the command prompt as I have found IDEs like Spyder can result in unwanted behaviour.
 
