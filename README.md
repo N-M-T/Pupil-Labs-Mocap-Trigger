@@ -41,7 +41,7 @@ to re-run the Python script a few times to resolve this
 
 
 ### Pupil Capture timestamp method
-annotations and pupil_remote_timestamps do not rely on the PC clock. Rather, all time stamps on trigger input 
+annotations and timestamps do not rely on the PC clock. Rather, all time stamps on trigger input 
 are taken from the Pupil Capture time base. In this method, each oneway trip duration is recorded and deducted from
 the timestamp to account for latency:
 
