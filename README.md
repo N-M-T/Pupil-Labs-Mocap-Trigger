@@ -1,6 +1,6 @@
 # Pupil Labs - Mocap Trigger
 
-Use a low-cost Arduino microcontroller to synchronise motion Capture systems (e.g. Vicon/Qualisys)
+Use a low-cost Arduino microcontroller to synchronise motion capture systems (e.g. Vicon/Qualisys)
 with the Pupil Core Mobile eye tracker. Temporal accuracy currently ~1 ms
 
 ## Theory
@@ -76,8 +76,8 @@ In the mocap software (e.g. Vicon Nexus), set the corresponding sync-out port to
 will then provide ~0.2V when not recording, and ~5.0V when an acquisition is started.
 
 ### Python
-In all scripts, change the IP and Port to connect to Pupil Capture. Pupil Capture's
-local IP address and Port can be found in Pupil Capture software under the Network API plugin. 
+In all scripts, change the IP and port to connect to Pupil Capture. Pupil Capture's
+local IP address and port can be found in Pupil Capture software under the Network API plugin. 
 
 For timestamps and timestamps_wclock_sync, modify the path variable to point to your recording directory. 
 
