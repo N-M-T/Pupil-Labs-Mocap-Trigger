@@ -11,7 +11,7 @@ voltage depending on recording state. In this case:
 - ~0.2V: **not** recording
 - ~5.0V: **is** recording
 
-When the voltage is above or below 3.5, the arduino sends a single character, 'h' or 'l', respectively,
+When the voltage is above or below 3.5, the Arduino sends a single character, 'h' or 'l', respectively,
 via serial port to the connected PC. The python scripts listen to the serial port. A change 
 between states is interpreted as a trigger, at which point a timestamp from Pupil Capture (or from the PC 
 clock depending on which script is run) is recorded. The timestamp can be stored in the Pupil Capture 
@@ -35,8 +35,8 @@ recursively set and test the sync  until a required threshold (e.g. <0.01ms) is 
 trigger input are then taken from the PC clock.
 
 - **Pros**: This method is stable when the eye tracker is connected to the PC via USB. 
-- **Cons**: When connected using the Pupil Remote android app, updating the Pupil Capture clock with socket.send_string("T {}".format(time()))
-seems not to always update the Pupil remote clock. When this happens a Pupil recording is not possible. I had
+- **Cons**: When connected using the Pupil Remote Android App, updating the Pupil Capture clock with socket.send_string("T {}".format(time()))
+seems not to always update the Pupil Remote clock. When this happens a Pupil recording is not possible. I had
 to re-run the Python script a few times to resolve this
 
 
