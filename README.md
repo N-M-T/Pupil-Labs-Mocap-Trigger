@@ -1,7 +1,7 @@
 # Pupil Labs - Mocap Trigger
 
 Use a low-cost Arduino microcontroller to synchronise motion capture systems (e.g. Vicon/Qualisys)
-with the Pupil Core Mobile eye tracker. Temporal accuracy currently ~1 ms
+with the Pupil Core mobile eye tracker. Temporal accuracy currently ~1 ms
 
 ## Theory
 
