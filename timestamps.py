@@ -77,15 +77,20 @@ def get_pupil_time(socket):
 def append_timestamp(start_stop, value):  
     now = datetime.datetime.now()  
     year = str(now.year)
-    month = str(now.month)
+    month = now.month
     day = now.day
     
     if day >= 10:
         day = str(day)
     else:
         day = '0' + str(day)
+        
+    if month >= 10:
+        month = str(month)
+    else:
+        month = '0' + str(month)
     
-    date = year + '_' + '0' + month + '_' + day
+    date = year + '_' + month + '_' + day
     target = [name for name in os.listdir(path) if name == date]    
     recordings = os.listdir(path + target[0])
     current = max(recordings)

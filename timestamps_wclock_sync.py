@@ -104,7 +104,12 @@ def append_timestamp(start_stop, value):
     else:
         day = '0' + str(day)
     
-    date = year + '_' + '0' + month + '_' + day
+    if month >= 10:
+        month = str(month)
+    else:
+        month = '0' + str(month)
+    
+    date = year + '_' + month + '_' + day
     target = [name for name in os.listdir(path) if name == date]    
     recordings = os.listdir(path + target[0])
     current = max(recordings)
